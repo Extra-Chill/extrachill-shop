@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Ability: extrachill/shop-create-shipping-label
  *
@@ -10,6 +9,8 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.7.0
  */
+
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,10 +24,10 @@ function extrachill_shop_register_create_shipping_label_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-create-shipping-label',
 		array(
-			'label'       => __( 'Purchase Shipping Label', 'extrachill-shop' ),
-			'description' => __( 'Purchase a USPS shipping label via Shippo for an artist\'s portion of an order. Automatically selects the cheapest rate, updates order status, and emails the label.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Purchase Shipping Label', 'extrachill-shop' ),
+			'description'         => __( 'Purchase a USPS shipping label via Shippo for an artist\'s portion of an order. Automatically selects the cheapest rate, updates order status, and emails the label.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'order_id'  => array(
@@ -38,9 +39,9 @@ function extrachill_shop_register_create_shipping_label_ability(): void {
 						'description' => 'Artist profile ID.',
 					),
 				),
-				'required' => array( 'order_id', 'artist_id' ),
+				'required'   => array( 'order_id', 'artist_id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'success'         => array( 'type' => 'boolean' ),
@@ -73,7 +74,7 @@ function extrachill_shop_register_create_shipping_label_ability(): void {
 				}
 				return current_user_can( 'manage_options' );
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => false,
@@ -123,7 +124,7 @@ function extrachill_shop_ability_create_shipping_label( array $input ): array|WP
 		return new WP_Error( 'order_not_found', 'Order not found.', array( 'status' => 404 ) );
 	}
 
-	$payouts = $order->get_meta( '_artist_payouts' ) ?: array();
+	$payouts = $order->get_meta( '_artist_payouts' ) ? $order->get_meta( '_artist_payouts' ) : array();
 	if ( ! isset( $payouts[ $artist_id ] ) ) {
 		return new WP_Error( 'invalid_artist', 'This order does not contain products from your artist.', array( 'status' => 400 ) );
 	}
@@ -143,8 +144,8 @@ function extrachill_shop_ability_create_shipping_label( array $input ): array|WP
 	// Return existing label if already purchased.
 	$existing_label = $order->get_meta( '_artist_label_' . $artist_id );
 	if ( ! empty( $existing_label ) ) {
-		$tracking   = $order->get_meta( '_artist_tracking_' . $artist_id ) ?: '';
-		$label_data = $order->get_meta( '_artist_label_data_' . $artist_id ) ?: array();
+		$tracking   = $order->get_meta( '_artist_tracking_' . $artist_id ) ? $order->get_meta( '_artist_tracking_' . $artist_id ) : '';
+		$label_data = $order->get_meta( '_artist_label_data_' . $artist_id ) ? $order->get_meta( '_artist_label_data_' . $artist_id ) : array();
 
 		return array(
 			'success'         => true,
