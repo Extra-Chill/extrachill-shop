@@ -221,7 +221,7 @@ function extrachill_shop_build_order_notification_body( $order, $artist_name, $p
 	);
 	$address_html  = implode( '<br>', array_map( 'esc_html', $address_lines ) );
 
-	$html  = sprintf(
+	$html = sprintf(
 		'<p>You have a new order for <strong>%s</strong> (Order <strong>#%s</strong>).</p>',
 		esc_html( $artist_name ),
 		esc_html( $order_number )
