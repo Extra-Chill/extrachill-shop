@@ -17,6 +17,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.WP.I18n.TextDomainMismatch -- WooCommerce template override: reuses WooCommerce core translatable strings ('woocommerce' domain) so they inherit WooCommerce's translations.
+
 do_action( 'woocommerce_before_cart' ); ?>
 
 <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
