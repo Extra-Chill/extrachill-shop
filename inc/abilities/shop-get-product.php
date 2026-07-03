@@ -23,10 +23,10 @@ function extrachill_shop_register_get_product_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-get-product',
 		array(
-			'label'       => __( 'Get Shop Product', 'extrachill-shop' ),
-			'description' => __( 'Get a single product by ID with full details.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Get Shop Product', 'extrachill-shop' ),
+			'description'         => __( 'Get a single product by ID with full details.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id' => array(
@@ -34,9 +34,9 @@ function extrachill_shop_register_get_product_ability(): void {
 						'description' => 'Product ID.',
 					),
 				),
-				'required' => array( 'id' ),
+				'required'   => array( 'id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'          => array( 'type' => 'integer' ),
@@ -68,7 +68,7 @@ function extrachill_shop_register_get_product_ability(): void {
 				}
 				return true;
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => true,

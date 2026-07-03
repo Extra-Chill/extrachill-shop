@@ -23,10 +23,10 @@ function extrachill_shop_register_update_product_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-update-product',
 		array(
-			'label'       => __( 'Update Shop Product', 'extrachill-shop' ),
-			'description' => __( 'Update an existing WooCommerce product — name, pricing, stock, status, images, sizes, and shipping.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Update Shop Product', 'extrachill-shop' ),
+			'description'         => __( 'Update an existing WooCommerce product — name, pricing, stock, status, images, sizes, and shipping.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'             => array(
@@ -96,9 +96,9 @@ function extrachill_shop_register_update_product_ability(): void {
 						'description' => 'Whether the product ships free.',
 					),
 				),
-				'required' => array( 'id' ),
+				'required'   => array( 'id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'     => array( 'type' => 'integer' ),
@@ -129,7 +129,7 @@ function extrachill_shop_register_update_product_ability(): void {
 				}
 				return true;
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => false,

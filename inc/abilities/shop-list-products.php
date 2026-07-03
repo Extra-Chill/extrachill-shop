@@ -23,14 +23,14 @@ function extrachill_shop_register_list_products_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-list-products',
 		array(
-			'label'       => __( 'List Shop Products', 'extrachill-shop' ),
-			'description' => __( 'List products belonging to the current user\'s artist profiles.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'List Shop Products', 'extrachill-shop' ),
+			'description'         => __( 'List products belonging to the current user\'s artist profiles.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'  => 'array',
 				'items' => array( 'type' => 'object' ),
 			),
@@ -44,7 +44,7 @@ function extrachill_shop_register_list_products_ability(): void {
 				}
 				return true;
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => true,
@@ -140,12 +140,12 @@ function extrachill_shop_ability_build_product_response( int $product_id ): arra
 	}
 
 	foreach ( $gallery_ids as $gid ) {
-		$url = (string) wp_get_attachment_image_url( $gid, 'thumbnail' );
+		$url            = (string) wp_get_attachment_image_url( $gid, 'thumbnail' );
 		$gallery_urls[] = array(
 			'id'  => $gid,
 			'url' => $url,
 		);
-		$images[] = array(
+		$images[]       = array(
 			'id'  => $gid,
 			'url' => $url,
 		);
@@ -167,7 +167,7 @@ function extrachill_shop_ability_build_product_response( int $product_id ): arra
 			},
 			0
 		);
-		$manage_stock = true;
+		$manage_stock   = true;
 	} elseif ( $manage_stock ) {
 		$stock_quantity = '' !== $stock ? (int) $stock : 0;
 	}

@@ -23,10 +23,10 @@ function extrachill_shop_register_upload_product_image_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-upload-product-image',
 		array(
-			'label'       => __( 'Upload Product Image', 'extrachill-shop' ),
-			'description' => __( 'Upload one or more images to a product (max 5 total). First image becomes the featured image; the rest go to the gallery.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Upload Product Image', 'extrachill-shop' ),
+			'description'         => __( 'Upload one or more images to a product (max 5 total). First image becomes the featured image; the rest go to the gallery.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'    => array(
@@ -39,9 +39,9 @@ function extrachill_shop_register_upload_product_image_ability(): void {
 						'items'       => array( 'type' => 'object' ),
 					),
 				),
-				'required' => array( 'id' ),
+				'required'   => array( 'id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'     => array( 'type' => 'integer' ),
@@ -79,7 +79,7 @@ function extrachill_shop_register_upload_product_image_ability(): void {
 				}
 				return false;
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => false,

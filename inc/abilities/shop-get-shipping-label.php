@@ -23,10 +23,10 @@ function extrachill_shop_register_get_shipping_label_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-get-shipping-label',
 		array(
-			'label'       => __( 'Get Shipping Label', 'extrachill-shop' ),
-			'description' => __( 'Retrieve an existing shipping label for a specific order.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Get Shipping Label', 'extrachill-shop' ),
+			'description'         => __( 'Retrieve an existing shipping label for a specific order.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'order_id'  => array(
@@ -38,9 +38,9 @@ function extrachill_shop_register_get_shipping_label_ability(): void {
 						'description' => 'Artist profile ID.',
 					),
 				),
-				'required' => array( 'order_id', 'artist_id' ),
+				'required'   => array( 'order_id', 'artist_id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'order_id'        => array( 'type' => 'integer' ),
@@ -73,7 +73,7 @@ function extrachill_shop_register_get_shipping_label_ability(): void {
 				}
 				return current_user_can( 'manage_options' );
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => true,

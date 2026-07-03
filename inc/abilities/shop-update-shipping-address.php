@@ -23,10 +23,10 @@ function extrachill_shop_register_update_shipping_address_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-update-shipping-address',
 		array(
-			'label'       => __( 'Update Shipping Address', 'extrachill-shop' ),
-			'description' => __( 'Update an artist\'s shipping from-address.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Update Shipping Address', 'extrachill-shop' ),
+			'description'         => __( 'Update an artist\'s shipping from-address.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'artist_id' => array(
@@ -63,9 +63,9 @@ function extrachill_shop_register_update_shipping_address_ability(): void {
 						'description' => 'Country code.',
 					),
 				),
-				'required' => array( 'artist_id', 'name', 'street1', 'city', 'state', 'zip' ),
+				'required'   => array( 'artist_id', 'name', 'street1', 'city', 'state', 'zip' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'success'   => array( 'type' => 'boolean' ),
@@ -93,7 +93,7 @@ function extrachill_shop_register_update_shipping_address_ability(): void {
 				}
 				return current_user_can( 'manage_options' );
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => false,

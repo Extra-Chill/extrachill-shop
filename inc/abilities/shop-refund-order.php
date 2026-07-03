@@ -23,10 +23,10 @@ function extrachill_shop_register_refund_order_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-refund-order',
 		array(
-			'label'       => __( 'Refund Shop Order', 'extrachill-shop' ),
-			'description' => __( 'Issue a full Stripe refund for an artist\'s portion of an order.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Refund Shop Order', 'extrachill-shop' ),
+			'description'         => __( 'Issue a full Stripe refund for an artist\'s portion of an order.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'        => array(
@@ -38,9 +38,9 @@ function extrachill_shop_register_refund_order_ability(): void {
 						'description' => 'Artist profile ID.',
 					),
 				),
-				'required' => array( 'id', 'artist_id' ),
+				'required'   => array( 'id', 'artist_id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'success'       => array( 'type' => 'boolean' ),
@@ -68,7 +68,7 @@ function extrachill_shop_register_refund_order_ability(): void {
 				}
 				return current_user_can( 'manage_options' );
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => false,
@@ -113,8 +113,8 @@ function extrachill_shop_ability_refund_order( array $input ): array|WP_Error {
 		return new WP_Error( 'invalid_refund_amount', 'No refundable amount found for this artist.', array( 'status' => 400 ) );
 	}
 
-	$charges            = $order->get_meta( '_stripe_charges' ) ?: array();
-	$payment_intent_id  = $charges[ $artist_id ]['payment_intent_id'] ?? '';
+	$charges           = $order->get_meta( '_stripe_charges' ) ?: array();
+	$payment_intent_id = $charges[ $artist_id ]['payment_intent_id'] ?? '';
 
 	if ( ! $payment_intent_id ) {
 		return new WP_Error( 'no_payment_intent', 'No payment intent found for this artist order.', array( 'status' => 400 ) );

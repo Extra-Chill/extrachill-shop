@@ -23,10 +23,10 @@ function extrachill_shop_register_update_order_status_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-update-order-status',
 		array(
-			'label'       => __( 'Update Order Status', 'extrachill-shop' ),
-			'description' => __( 'Update the status of an order, optionally adding a tracking number.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Update Order Status', 'extrachill-shop' ),
+			'description'         => __( 'Update the status of an order, optionally adding a tracking number.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'              => array(
@@ -47,9 +47,9 @@ function extrachill_shop_register_update_order_status_ability(): void {
 						'description' => 'Optional tracking number.',
 					),
 				),
-				'required' => array( 'id', 'artist_id', 'status' ),
+				'required'   => array( 'id', 'artist_id', 'status' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'              => array( 'type' => 'integer' ),
@@ -77,7 +77,7 @@ function extrachill_shop_register_update_order_status_ability(): void {
 				}
 				return current_user_can( 'manage_options' );
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => false,

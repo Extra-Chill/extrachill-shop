@@ -43,7 +43,7 @@ function extrachill_shop_get_lifetime_membership_product_config() {
 		'name'                  => 'Lifetime Extra Chill Membership',
 		'price'                 => '20',
 		'sold_individually'     => true,
-		'short_description'      => 'Support independent music journalism and enjoy an ad-free experience across the entire Extra Chill network. One-time payment, lifetime status.',
+		'short_description'     => 'Support independent music journalism and enjoy an ad-free experience across the entire Extra Chill network. One-time payment, lifetime status.',
 		'option_key'            => extrachill_shop_get_lifetime_membership_product_option_key(),
 		'sync_flag_key'         => extrachill_shop_get_lifetime_membership_product_sync_flag_key(),
 		'sync_transient_key'    => extrachill_shop_get_lifetime_membership_product_sync_transient_key(),

@@ -23,10 +23,10 @@ function extrachill_shop_register_get_shipping_address_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-get-shipping-address',
 		array(
-			'label'       => __( 'Get Shipping Address', 'extrachill-shop' ),
-			'description' => __( 'Retrieve an artist\'s shipping from-address.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Get Shipping Address', 'extrachill-shop' ),
+			'description'         => __( 'Retrieve an artist\'s shipping from-address.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'artist_id' => array(
@@ -34,9 +34,9 @@ function extrachill_shop_register_get_shipping_address_ability(): void {
 						'description' => 'Artist profile ID.',
 					),
 				),
-				'required' => array( 'artist_id' ),
+				'required'   => array( 'artist_id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'artist_id' => array( 'type' => 'integer' ),
@@ -64,7 +64,7 @@ function extrachill_shop_register_get_shipping_address_ability(): void {
 				}
 				return current_user_can( 'manage_options' );
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => true,
