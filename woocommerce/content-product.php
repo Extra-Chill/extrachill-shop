@@ -19,7 +19,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <li <?php wc_product_class( '', $product ); ?>>
 	<div class="product-card-image">
 		<a href="<?php echo esc_url( get_permalink() ); ?>">
-		<?php echo $product->get_image( 'woocommerce_thumbnail' ); ?>
+		<?php echo $product->get_image( 'woocommerce_thumbnail' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted WooCommerce core image HTML. ?>
 		</a>
 	</div>
 

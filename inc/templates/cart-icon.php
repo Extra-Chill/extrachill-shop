@@ -16,7 +16,7 @@ function extrachill_shop_display_cart_icon() {
 	?>
 	<div class="cart-icon header-right-icon">
 		<a href="<?php echo esc_url( $cart_url ); ?>" class="cart-link" title="View Cart">
-			<?php echo ec_icon( 'cart', 'cart-top' ); ?>
+			<?php echo ec_icon( 'cart', 'cart-top' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted theme icon (SVG) HTML. ?>
 		</a>
 	</div>
 	<?php

@@ -238,7 +238,7 @@ function extrachill_shop_render_artist_meta_box( $post ) {
 	if ( defined( 'EC_PLATFORM_ARTIST_ID' ) ) {
 		echo '<p class="description"><strong>' . esc_html__( 'Tip:', 'extrachill-shop' ) . '</strong> ';
 		/* translators: %d is the platform artist ID */
-		printf( esc_html__( 'Use %d for Extra Chill platform products.', 'extrachill-shop' ), EC_PLATFORM_ARTIST_ID );
+		printf( esc_html__( 'Use %d for Extra Chill platform products.', 'extrachill-shop' ), (int) EC_PLATFORM_ARTIST_ID );
 		echo '</p>';
 	}
 

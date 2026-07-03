@@ -115,7 +115,7 @@ if ( $products->have_posts() ) :
 		if ( $pagination_links ) :
 			?>
 			<nav class="pagination-links" id="shop-pagination">
-				<?php echo $pagination_links; ?>
+				<?php echo wp_kses_post( $pagination_links ); ?>
 			</nav>
 			<?php
 		endif;
