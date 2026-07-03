@@ -159,7 +159,7 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Name.
 	$name = $input['name'] ?? null;
-	if ( $name !== null ) {
+	if ( null !== $name ) {
 		wp_update_post( array(
 			'ID'         => $product_id,
 			'post_title' => sanitize_text_field( (string) $name ),
@@ -168,7 +168,7 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Description.
 	$description = $input['description'] ?? null;
-	if ( $description !== null ) {
+	if ( null !== $description ) {
 		wp_update_post( array(
 			'ID'           => $product_id,
 			'post_content' => wp_kses_post( wp_unslash( (string) $description ) ),
@@ -177,14 +177,14 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Price.
 	$price = $input['price'] ?? null;
-	if ( $price !== null && is_numeric( $price ) && (float) $price > 0 ) {
+	if ( null !== $price && is_numeric( $price ) && (float) $price > 0 ) {
 		update_post_meta( $product_id, '_regular_price', (string) $price );
 		update_post_meta( $product_id, '_price', (string) $price );
 	}
 
 	// Image reorder (image_ids).
 	$image_ids = $input['image_ids'] ?? null;
-	if ( $image_ids !== null ) {
+	if ( null !== $image_ids ) {
 		$reorder_result = extrachill_shop_product_set_image_order( $product_id, array_map( 'absint', (array) $image_ids ) );
 		if ( is_wp_error( $reorder_result ) ) {
 			return $reorder_result;
@@ -193,7 +193,7 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Sale price.
 	$sale_price = $input['sale_price'] ?? null;
-	if ( $sale_price !== null ) {
+	if ( null !== $sale_price ) {
 		$current_regular = (float) get_post_meta( $product_id, '_regular_price', true );
 		if ( is_numeric( $sale_price ) && (float) $sale_price > 0 && (float) $sale_price < $current_regular ) {
 			update_post_meta( $product_id, '_sale_price', (string) $sale_price );
@@ -206,11 +206,11 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Stock management.
 	$manage_stock = $input['manage_stock'] ?? null;
-	if ( $manage_stock !== null ) {
+	if ( null !== $manage_stock ) {
 		update_post_meta( $product_id, '_manage_stock', $manage_stock ? 'yes' : 'no' );
 		if ( $manage_stock ) {
 			$stock_quantity = $input['stock_quantity'] ?? null;
-			if ( $stock_quantity !== null ) {
+			if ( null !== $stock_quantity ) {
 				update_post_meta( $product_id, '_stock', (string) absint( (int) $stock_quantity ) );
 			}
 		} else {
@@ -220,7 +220,7 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Featured image.
 	$image_id = $input['image_id'] ?? null;
-	if ( $image_id !== null ) {
+	if ( null !== $image_id ) {
 		if ( (int) $image_id > 0 ) {
 			set_post_thumbnail( $product_id, absint( (int) $image_id ) );
 		} else {
@@ -230,7 +230,7 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Gallery.
 	$gallery_ids = $input['gallery_ids'] ?? null;
-	if ( $gallery_ids !== null ) {
+	if ( null !== $gallery_ids ) {
 		if ( is_array( $gallery_ids ) && ! empty( $gallery_ids ) ) {
 			$gallery_ids = array_map( 'absint', $gallery_ids );
 			$gallery_ids = array_filter( $gallery_ids );
@@ -243,7 +243,7 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Artist reassignment.
 	$artist_id = $input['artist_id'] ?? null;
-	if ( $artist_id !== null ) {
+	if ( null !== $artist_id ) {
 		$artist_id = (int) $artist_id;
 		if ( extrachill_shop_user_can_manage_artist( $artist_id ) ) {
 			update_post_meta( $product_id, '_artist_profile_id', $artist_id );
@@ -253,7 +253,7 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Sizes / variations.
 	$sizes = $input['sizes'] ?? null;
-	if ( $sizes !== null ) {
+	if ( null !== $sizes ) {
 		$current_price      = get_post_meta( $product_id, '_regular_price', true );
 		$current_sale_price = get_post_meta( $product_id, '_sale_price', true );
 		$variation_result   = extrachill_shop_setup_product_variations( $product_id, (array) $sizes, $current_price, $current_sale_price );
@@ -264,7 +264,7 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Status.
 	$status = $input['status'] ?? null;
-	if ( $status !== null ) {
+	if ( null !== $status ) {
 		$status_result = extrachill_shop_product_set_status( $product_id, (string) $status );
 		if ( is_wp_error( $status_result ) ) {
 			return $status_result;
@@ -273,7 +273,7 @@ function extrachill_shop_ability_update_product( array $input ): array|WP_Error 
 
 	// Ships free.
 	$ships_free = $input['ships_free'] ?? null;
-	if ( $ships_free !== null ) {
+	if ( null !== $ships_free ) {
 		update_post_meta( $product_id, '_ships_free', $ships_free ? '1' : '0' );
 	}
 

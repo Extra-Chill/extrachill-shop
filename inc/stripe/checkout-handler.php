@@ -26,7 +26,7 @@ function extrachill_shop_group_cart_by_artist( $cart_items ) {
 		$artist_id  = extrachill_shop_get_product_artist_id( $product_id );
 
 		// Non-artist and platform artist products go to platform group (artist_id = 0).
-		if ( ! $artist_id || ( defined( 'EC_PLATFORM_ARTIST_ID' ) && $artist_id === EC_PLATFORM_ARTIST_ID ) ) {
+		if ( ! $artist_id || ( defined( 'EC_PLATFORM_ARTIST_ID' ) && EC_PLATFORM_ARTIST_ID === $artist_id ) ) {
 			$artist_id = 0;
 		}
 
@@ -337,7 +337,7 @@ function extrachill_shop_order_is_platform_only( $order ) {
 	foreach ( $order->get_items() as $item ) {
 		$artist_id = extrachill_shop_get_product_artist_id( $item->get_product_id() );
 		// Platform artist products are treated as platform products.
-		if ( $artist_id && ( ! defined( 'EC_PLATFORM_ARTIST_ID' ) || $artist_id !== EC_PLATFORM_ARTIST_ID ) ) {
+		if ( $artist_id && ( ! defined( 'EC_PLATFORM_ARTIST_ID' ) || EC_PLATFORM_ARTIST_ID !== $artist_id ) ) {
 			return false;
 		}
 	}
