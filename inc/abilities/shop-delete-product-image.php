@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Ability: extrachill/shop-delete-product-image
  *
@@ -10,6 +9,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.7.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 

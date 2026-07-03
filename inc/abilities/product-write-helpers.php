@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Product Write Helpers
  *
@@ -21,6 +20,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.8.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
