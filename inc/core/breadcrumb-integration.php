@@ -185,6 +185,7 @@ add_action( 'extrachill_before_body_content', 'extrachill_shop_display_breadcrum
  * @param string $url   Back-to-home link URL
  * @return string Modified label
  */
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_back_to_home_label( $label, $url ) {
 	$shop_blog_id = function_exists( 'ec_get_blog_id' ) ? ec_get_blog_id( 'shop' ) : null;
 	if ( ! $shop_blog_id || get_current_blog_id() !== $shop_blog_id ) {

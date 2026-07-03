@@ -121,6 +121,7 @@ function extrachill_shop_add_event_url_field() {
 	<?php
 }
 
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_validate_priority_boost_add_to_cart( $passed, $product_id, $quantity ) {
 	if ( ! extrachill_shop_is_priority_boost_product_id( $product_id ) ) {
 		return $passed;
@@ -141,6 +142,7 @@ function extrachill_shop_validate_priority_boost_add_to_cart( $passed, $product_
 	return $passed;
 }
 
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_save_event_to_cart( $cart_item_data, $product_id, $variation_id ) {
 	if ( ! extrachill_shop_is_priority_boost_product_id( $product_id ) ) {
 		return $cart_item_data;
@@ -223,6 +225,7 @@ function extrachill_shop_validate_event_cart() {
 	}
 }
 
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_add_event_to_order_item( $item, $cart_item_key, $values, $order ) {
 	if ( empty( $values['priority_boost_event_id'] ) ) {
 		return;

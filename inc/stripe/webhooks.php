@@ -251,6 +251,7 @@ function extrachill_shop_handle_charge_refunded( $charge ) {
  * @param string $event_type Event type.
  * @param object $data       Event data.
  */
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_log_webhook_event( $event_type, $data ) {
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 		error_log( 'ExtraChill Shop Webhook: ' . $event_type );

@@ -64,6 +64,7 @@ function extrachill_shop_register_list_products_ability(): void {
  * @param array $input Ability input (unused).
  * @return array|WP_Error
  */
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_ability_list_products( array $input ): array|WP_Error {
 	$artist_ids = extrachill_shop_get_user_artist_ids();
 

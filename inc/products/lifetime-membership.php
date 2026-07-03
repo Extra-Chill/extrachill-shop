@@ -71,6 +71,7 @@ function extrachill_shop_add_community_username_field() {
 	<?php
 }
 
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_validate_lifetime_membership_add_to_cart( $passed, $product_id, $quantity ) {
 	if ( ! extrachill_shop_is_lifetime_membership_product_id( $product_id ) ) {
 		return $passed;
@@ -91,6 +92,7 @@ function extrachill_shop_validate_lifetime_membership_add_to_cart( $passed, $pro
 	return $passed;
 }
 
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_save_username_to_cart( $cart_item_data, $product_id, $variation_id ) {
 	if ( ! extrachill_shop_is_lifetime_membership_product_id( $product_id ) ) {
 		return $cart_item_data;
@@ -108,6 +110,7 @@ function extrachill_shop_save_username_to_cart( $cart_item_data, $product_id, $v
 	return $cart_item_data;
 }
 
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_add_username_to_order_item( $item, $cart_item_key, $values, $order ) {
 	if ( empty( $values['community_username'] ) ) {
 		return;
