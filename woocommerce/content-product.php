@@ -46,8 +46,11 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 
 		<?php woocommerce_template_loop_rating(); ?>
 
-		<?php if ( $price_html = $product->get_price_html() ) : ?>
-		<span class="price"><?php echo $price_html; ?></span>
+		<?php
+		$price_html = $product->get_price_html();
+		if ( $price_html ) :
+			?>
+		<span class="price"><?php echo wp_kses_post( $price_html ); ?></span>
 		<?php endif; ?>
 
 		<?php woocommerce_template_loop_add_to_cart(); ?>

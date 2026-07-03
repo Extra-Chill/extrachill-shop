@@ -102,9 +102,8 @@ function extrachill_shop_breadcrumb_trail( $trail ) {
 			}
 			$breadcrumbs[] = esc_html( $term->name );
 		}
-	}
-	// Single product
-	elseif ( is_product() ) {
+	} elseif ( is_product() ) {
+		// Single product.
 		$product_cats = get_the_terms( get_the_ID(), 'product_cat' );
 		if ( $product_cats && ! is_wp_error( $product_cats ) ) {
 			$product_cat = array_shift( $product_cats );
@@ -119,17 +118,14 @@ function extrachill_shop_breadcrumb_trail( $trail ) {
 			}
 			$breadcrumbs[] = '<a href="' . esc_url( get_term_link( $product_cat ) ) . '">' . esc_html( $product_cat->name ) . '</a>';
 		}
-	}
-	// Cart
-	elseif ( is_cart() ) {
+	} elseif ( is_cart() ) {
+		// Cart.
 		$breadcrumbs[] = 'Cart';
-	}
-	// Checkout
-	elseif ( is_checkout() ) {
+	} elseif ( is_checkout() ) {
+		// Checkout.
 		$breadcrumbs[] = 'Checkout';
-	}
-	// My Account
-	elseif ( is_account_page() ) {
+	} elseif ( is_account_page() ) {
+		// My Account.
 		$breadcrumbs[] = 'My Account';
 	}
 

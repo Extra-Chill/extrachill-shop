@@ -269,7 +269,8 @@ function extrachill_shop_get_or_create_stripe_customer( $order ) {
 		try {
 			return \Stripe\Customer::retrieve( $customer_id );
 		} catch ( \Exception $e ) {
-			// Customer doesn't exist, create new one.
+			// Customer doesn't exist; fall through to create a new one.
+			unset( $e );
 		}
 	}
 

@@ -123,20 +123,8 @@ class ExtraChillShop {
 	}
 }
 
-// Initialize the plugin
-function extrachill_shop() {
-	return ExtraChillShop::instance();
-}
+// Procedural bootstrap helpers (kept out of this OO file per coding standards).
+require_once EXTRACHILL_SHOP_PLUGIN_DIR . 'inc/core/bootstrap.php';
 
-// Start the plugin
+// Start the plugin.
 extrachill_shop();
-
-/**
- * Render homepage content for shop.extrachill.com
- *
- * Hooked via extrachill_homepage_content action.
- */
-function extrachill_shop_render_homepage() {
-	include EXTRACHILL_SHOP_PLUGIN_DIR . 'inc/templates/shop-homepage.php';
-}
-add_action( 'extrachill_homepage_content', 'extrachill_shop_render_homepage', 10 );
