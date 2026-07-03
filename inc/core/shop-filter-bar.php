@@ -40,8 +40,11 @@ function extrachill_shop_filter_bar_items( $items ) {
 		return $items;
 	}
 
+	// Read-only, bookmarkable GET filters for display; no state change, so no nonce applies.
+	// phpcs:disable WordPress.Security.NonceVerification.Recommended
 	$current_artist = isset( $_GET['artist'] ) ? sanitize_text_field( wp_unslash( $_GET['artist'] ) ) : '';
 	$current_sort   = isset( $_GET['sort'] ) ? sanitize_key( $_GET['sort'] ) : 'recent';
+	// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 	// Artist dropdown (hidden on artist taxonomy archives).
 	if ( ! is_tax( 'artist' ) ) {

@@ -234,6 +234,7 @@ function extrachill_shop_handle_lifetime_membership_purchase( $order_id ) {
 	}
 
 	if ( ! function_exists( 'ec_create_lifetime_membership' ) ) {
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 		error_log( 'extrachill-shop: ec_create_lifetime_membership() not found.' );
 		return;
 	}
@@ -247,6 +248,7 @@ function extrachill_shop_handle_lifetime_membership_purchase( $order_id ) {
 		$username = sanitize_text_field( $username );
 
 		if ( empty( $username ) ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 			error_log( "extrachill-shop: missing community_username meta for order {$order_id}." );
 			break;
 		}
@@ -259,6 +261,7 @@ function extrachill_shop_handle_lifetime_membership_purchase( $order_id ) {
 
 		$result = ec_create_lifetime_membership( $username, $order_data );
 		if ( is_wp_error( $result ) ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 			error_log( 'extrachill-shop: membership creation failed for order ' . $order_id . ': ' . $result->get_error_message() );
 			break;
 		}

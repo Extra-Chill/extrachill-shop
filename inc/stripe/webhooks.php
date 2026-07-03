@@ -254,6 +254,7 @@ function extrachill_shop_handle_charge_refunded( $charge ) {
 // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_log_webhook_event( $event_type, $data ) {
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 		error_log( 'ExtraChill Shop Webhook: ' . $event_type );
 	}
 }

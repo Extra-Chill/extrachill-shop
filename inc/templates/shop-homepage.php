@@ -13,11 +13,13 @@ defined( 'ABSPATH' ) || exit;
 extrachill_breadcrumbs();
 extrachill_filter_bar();
 
-// Get filter params
+// Get filter params. Read-only, bookmarkable GET filters for display; no state change, so no nonce applies.
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 $current_artist = isset( $_GET['artist'] ) ? sanitize_text_field( wp_unslash( $_GET['artist'] ) ) : '';
 $current_sort   = isset( $_GET['sort'] ) ? sanitize_key( $_GET['sort'] ) : 'recent';
 $current_search = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
-$current_page   = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+// phpcs:enable WordPress.Security.NonceVerification.Recommended
+$current_page = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
 // Build query args
 $args = array(

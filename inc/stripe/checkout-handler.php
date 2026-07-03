@@ -240,6 +240,7 @@ function extrachill_shop_process_artist_transfers( $order, $charge_id ) {
 	} catch ( \Exception $e ) {
 		// Transfers can be reversed if needed, but typically we'd investigate manually.
 		// Log the error and failed state for admin review.
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 		error_log( 'Stripe transfer failed for order ' . $order->get_id() . ': ' . $e->getMessage() );
 
 		return array(
@@ -316,6 +317,7 @@ function extrachill_shop_handle_charge_failure( $successful_charges, $failed_art
 			$refunded[] = $artist_id;
 		} catch ( \Exception $e ) {
 			$failed[ $artist_id ] = $e->getMessage();
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 			error_log( 'Rollback refund failed for artist ' . $artist_id . ': ' . $e->getMessage() );
 		}
 	}
