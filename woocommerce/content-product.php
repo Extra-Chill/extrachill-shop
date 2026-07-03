@@ -29,10 +29,10 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		if ( $artist_terms && ! is_wp_error( $artist_terms ) ) :
 			?>
 		<div class="taxonomy-badges">
-			<?php foreach ( $artist_terms as $term ) : ?>
-				<a href="<?php echo esc_url( get_term_link( $term ) ); ?>"
-				class="taxonomy-badge artist-badge artist-<?php echo esc_attr( $term->slug ); ?>">
-				<?php echo esc_html( $term->name ); ?>
+			<?php foreach ( $artist_terms as $artist_term ) : ?>
+				<a href="<?php echo esc_url( get_term_link( $artist_term ) ); ?>"
+				class="taxonomy-badge artist-badge artist-<?php echo esc_attr( $artist_term->slug ); ?>">
+				<?php echo esc_html( $artist_term->name ); ?>
 			</a>
 			<?php endforeach; ?>
 		</div>
@@ -40,7 +40,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 
 		<h2 class="woocommerce-loop-product__title">
 			<a href="<?php echo esc_url( get_permalink() ); ?>">
-				<?php echo get_the_title(); ?>
+				<?php echo esc_html( get_the_title() ); ?>
 			</a>
 		</h2>
 

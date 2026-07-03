@@ -17,13 +17,13 @@ extrachill_filter_bar();
 $current_artist = isset( $_GET['artist'] ) ? sanitize_text_field( wp_unslash( $_GET['artist'] ) ) : '';
 $current_sort   = isset( $_GET['sort'] ) ? sanitize_key( $_GET['sort'] ) : 'recent';
 $current_search = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
-$paged          = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+$current_page          = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
 // Build query args
 $args = array(
 	'post_type'      => 'product',
 	'posts_per_page' => 12,
-	'paged'          => $paged,
+	'paged'          => $current_page,
 	'post_status'    => 'publish',
 );
 
@@ -92,7 +92,7 @@ if ( $products->have_posts() ) :
 		// Build pagination with filter params preserved
 		$pagination_args = array(
 			'total'     => $products->max_num_pages,
-			'current'   => $paged,
+			'current'   => $current_page,
 			'mid_size'  => 2,
 			'prev_text' => __( '&larr; Previous', 'extrachill-shop' ),
 			'next_text' => __( 'Next &rarr;', 'extrachill-shop' ),

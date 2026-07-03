@@ -54,6 +54,7 @@ function extrachill_shop_process_artist_payments( $order_id ) {
 		$order->update_meta_data( '_stripe_connect_processed', '1' );
 		$order->add_order_note(
 			sprintf(
+				/* translators: %d: number of Stripe Connect transfers created. */
 				__( 'Stripe Connect: Artist transfers completed. %d transfer(s) created.', 'extrachill-shop' ),
 				count( $result['transfers'] )
 			)
@@ -62,6 +63,7 @@ function extrachill_shop_process_artist_payments( $order_id ) {
 	} else {
 		$order->add_order_note(
 			sprintf(
+				/* translators: %s: Stripe Connect transfer error message. */
 				__( 'Stripe Connect: Artist transfer failed - %s', 'extrachill-shop' ),
 				$result['error']
 			)

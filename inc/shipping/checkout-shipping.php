@@ -84,6 +84,7 @@ function extrachill_shop_shipping_method_init() {
 
 			if ( $artist_count > 1 ) {
 				$label = sprintf(
+					/* translators: 1: per-artist shipping rate, 2: number of artists. */
 					__( 'Shipping ($%1$s × %2$d artists)', 'extrachill-shop' ),
 					number_format( $rate_per_artist, 0 ),
 					$artist_count
