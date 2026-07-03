@@ -17,7 +17,7 @@ extrachill_filter_bar();
 $current_artist = isset( $_GET['artist'] ) ? sanitize_text_field( wp_unslash( $_GET['artist'] ) ) : '';
 $current_sort   = isset( $_GET['sort'] ) ? sanitize_key( $_GET['sort'] ) : 'recent';
 $current_search = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
-$current_page          = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+$current_page   = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
 // Build query args
 $args = array(
