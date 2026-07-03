@@ -101,7 +101,8 @@ function extrachill_shop_ability_refund_order( array $input ): array|WP_Error {
 		return new WP_Error( 'order_not_found', 'Order not found.', array( 'status' => 404 ) );
 	}
 
-	$payouts = $order->get_meta( '_artist_payouts' ) ?: array();
+	$payouts = $order->get_meta( '_artist_payouts' );
+	$payouts = $payouts ? $payouts : array();
 	if ( ! isset( $payouts[ $artist_id ] ) ) {
 		return new WP_Error( 'invalid_artist', 'This order does not contain products from your artist.', array( 'status' => 400 ) );
 	}
@@ -113,7 +114,8 @@ function extrachill_shop_ability_refund_order( array $input ): array|WP_Error {
 		return new WP_Error( 'invalid_refund_amount', 'No refundable amount found for this artist.', array( 'status' => 400 ) );
 	}
 
-	$charges           = $order->get_meta( '_stripe_charges' ) ?: array();
+	$charges           = $order->get_meta( '_stripe_charges' );
+	$charges           = $charges ? $charges : array();
 	$payment_intent_id = $charges[ $artist_id ]['payment_intent_id'] ?? '';
 
 	if ( ! $payment_intent_id ) {

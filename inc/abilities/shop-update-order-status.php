@@ -112,7 +112,8 @@ function extrachill_shop_ability_update_order_status( array $input ): array|WP_E
 		return new WP_Error( 'order_not_found', 'Order not found.', array( 'status' => 404 ) );
 	}
 
-	$payouts = $order->get_meta( '_artist_payouts' ) ?: array();
+	$payouts = $order->get_meta( '_artist_payouts' );
+	$payouts = $payouts ? $payouts : array();
 	if ( ! isset( $payouts[ $artist_id ] ) ) {
 		return new WP_Error( 'rest_forbidden', 'This order does not contain products from your artist.', array( 'status' => 403 ) );
 	}

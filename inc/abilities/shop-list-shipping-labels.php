@@ -111,18 +111,22 @@ function extrachill_shop_ability_list_shipping_labels( array $input ): array|WP_
 	$labels = array();
 
 	foreach ( $orders as $order ) {
-		$payouts = $order->get_meta( '_artist_payouts' ) ?: array();
+		$payouts = $order->get_meta( '_artist_payouts' );
+		$payouts = $payouts ? $payouts : array();
 		if ( ! isset( $payouts[ $artist_id ] ) ) {
 			continue;
 		}
 
-		$label_url = $order->get_meta( '_artist_label_' . $artist_id ) ?: '';
+		$label_url = $order->get_meta( '_artist_label_' . $artist_id );
+		$label_url = $label_url ? $label_url : '';
 		if ( empty( $label_url ) ) {
 			continue;
 		}
 
-		$tracking_number = $order->get_meta( '_artist_tracking_' . $artist_id ) ?: '';
-		$label_data      = $order->get_meta( '_artist_label_data_' . $artist_id ) ?: array();
+		$tracking_number = $order->get_meta( '_artist_tracking_' . $artist_id );
+		$tracking_number = $tracking_number ? $tracking_number : '';
+		$label_data      = $order->get_meta( '_artist_label_data_' . $artist_id );
+		$label_data      = $label_data ? $label_data : array();
 
 		$labels[] = array(
 			'order_id'        => $order->get_id(),

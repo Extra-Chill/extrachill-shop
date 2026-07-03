@@ -106,9 +106,12 @@ function extrachill_shop_ability_get_shipping_label( array $input ): array|WP_Er
 		return new WP_Error( 'order_not_found', 'Order not found.', array( 'status' => 404 ) );
 	}
 
-	$label_url       = $order->get_meta( '_artist_label_' . $artist_id ) ?: '';
-	$tracking_number = $order->get_meta( '_artist_tracking_' . $artist_id ) ?: '';
-	$label_data      = $order->get_meta( '_artist_label_data_' . $artist_id ) ?: array();
+	$label_url       = $order->get_meta( '_artist_label_' . $artist_id );
+	$label_url       = $label_url ? $label_url : '';
+	$tracking_number = $order->get_meta( '_artist_tracking_' . $artist_id );
+	$tracking_number = $tracking_number ? $tracking_number : '';
+	$label_data      = $order->get_meta( '_artist_label_data_' . $artist_id );
+	$label_data      = $label_data ? $label_data : array();
 
 	return array(
 		'order_id'        => $order_id,

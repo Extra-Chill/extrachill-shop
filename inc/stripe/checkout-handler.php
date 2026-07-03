@@ -351,7 +351,8 @@ function extrachill_shop_order_is_platform_only( $order ) {
  * @return array Charges indexed by artist ID.
  */
 function extrachill_shop_get_order_charges( $order ) {
-	return $order->get_meta( '_stripe_charges' ) ?: array();
+	$charges = $order->get_meta( '_stripe_charges' );
+	return $charges ? $charges : array();
 }
 
 /**
@@ -361,5 +362,6 @@ function extrachill_shop_get_order_charges( $order ) {
  * @return array Payout data indexed by artist ID.
  */
 function extrachill_shop_get_order_artist_payouts( $order ) {
-	return $order->get_meta( '_artist_payouts' ) ?: array();
+	$payouts = $order->get_meta( '_artist_payouts' );
+	return $payouts ? $payouts : array();
 }

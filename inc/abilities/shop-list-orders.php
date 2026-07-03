@@ -135,7 +135,8 @@ function extrachill_shop_ability_list_orders( array $input ): array|WP_Error {
 	$needs_fulfillment_count = 0;
 
 	foreach ( $orders as $order ) {
-		$payouts = $order->get_meta( '_artist_payouts' ) ?: array();
+		$payouts = $order->get_meta( '_artist_payouts' );
+		$payouts = $payouts ? $payouts : array();
 		if ( ! isset( $payouts[ $artist_id ] ) ) {
 			continue;
 		}
@@ -187,9 +188,11 @@ function extrachill_shop_ability_list_orders( array $input ): array|WP_Error {
  * @return array
  */
 function extrachill_shop_ability_build_order_response( $order, int $artist_id ): array {
-	$payouts         = $order->get_meta( '_artist_payouts' ) ?: array();
+	$payouts         = $order->get_meta( '_artist_payouts' );
+	$payouts         = $payouts ? $payouts : array();
 	$artist_payout   = $payouts[ $artist_id ] ?? array();
-	$tracking_number = $order->get_meta( '_artist_tracking_' . $artist_id ) ?: '';
+	$tracking_number = $order->get_meta( '_artist_tracking_' . $artist_id );
+	$tracking_number = $tracking_number ? $tracking_number : '';
 
 	$items = array();
 	if ( ! empty( $artist_payout['items'] ) ) {
