@@ -38,6 +38,7 @@ function extrachill_shop_save_raffle_max_tickets_field( $product_id ) {
 		return;
 	}
 
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Runs on the WooCommerce product-save action, which verifies its own nonce; capability is checked above.
 	$max_tickets = isset( $_POST['_raffle_max_tickets'] ) ? absint( $_POST['_raffle_max_tickets'] ) : '';
 
 	if ( $max_tickets ) {

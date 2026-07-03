@@ -31,10 +31,12 @@ function extrachill_shop_is_priority_boost_product_id( $product_id ) {
 }
 
 function extrachill_shop_get_posted_event_url() {
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Read during the WooCommerce add-to-cart request, which WooCommerce nonce-verifies; value is sanitized.
 	if ( empty( $_POST['priority_boost_event_url'] ) ) {
 		return '';
 	}
 
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Read during the WooCommerce add-to-cart request, which WooCommerce nonce-verifies; value is sanitized.
 	return (string) esc_url_raw( wp_unslash( $_POST['priority_boost_event_url'] ) );
 }
 

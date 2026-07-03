@@ -42,10 +42,12 @@ function extrachill_shop_get_default_community_username() {
 }
 
 function extrachill_shop_get_posted_community_username() {
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Read during the WooCommerce add-to-cart request, which WooCommerce nonce-verifies; value is sanitized.
 	if ( empty( $_POST['community_username'] ) ) {
 		return '';
 	}
 
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Read during the WooCommerce add-to-cart request, which WooCommerce nonce-verifies; value is sanitized.
 	return (string) sanitize_text_field( wp_unslash( $_POST['community_username'] ) );
 }
 
@@ -151,10 +153,12 @@ function extrachill_shop_cart_username_input( $name, $cart_item, $cart_item_key 
 }
 
 function extrachill_shop_save_username_cart_on_cart() {
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Read during the WooCommerce cart-update request, which WooCommerce nonce-verifies; values are sanitized below.
 	if ( empty( $_POST['community_username'] ) || ! is_array( $_POST['community_username'] ) ) {
 		return;
 	}
 
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Read during the WooCommerce cart-update request, which WooCommerce nonce-verifies; values are sanitized below.
 	$posted = wp_unslash( $_POST['community_username'] );
 
 	foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
