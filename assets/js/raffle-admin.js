@@ -3,9 +3,9 @@
  *
  * Shows "Max Raffle Tickets" field only when product has "raffle" tag.
  * Uses MutationObserver for real-time tag monitoring with 500ms polling fallback.
- *
- * @package ExtraChillShop
  */
+
+/* global MutationObserver */
 
 (function() {
     'use strict';

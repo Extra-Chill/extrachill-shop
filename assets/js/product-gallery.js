@@ -4,7 +4,6 @@
  * Handles thumbnail click to swap main image.
  * Prepares data attributes for lightbox integration.
  *
- * @package ExtraChillShop
  * @since 1.0.0
  */
 ( function () {
@@ -14,7 +13,7 @@
 		mainImage: null,
 		thumbnails: null,
 
-		init: function () {
+		init() {
 			this.mainImage = document.getElementById( 'product-main-image' );
 			this.thumbnails = document.querySelectorAll(
 				'.product-gallery__thumbnail'
@@ -27,7 +26,7 @@
 			this.bindThumbnails();
 		},
 
-		bindThumbnails: function () {
+		bindThumbnails() {
 			this.thumbnails.forEach( ( thumb ) => {
 				thumb.addEventListener( 'click', ( e ) => {
 					e.preventDefault();
@@ -36,7 +35,7 @@
 			} );
 		},
 
-		swapImage: function ( thumb ) {
+		swapImage( thumb ) {
 			const largeSrc = thumb.dataset.largeSrc;
 			const fullSrc = thumb.dataset.fullSrc;
 
