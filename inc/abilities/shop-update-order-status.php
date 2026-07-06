@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Ability: extrachill/shop-update-order-status
  *
@@ -10,6 +9,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.7.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,10 +23,10 @@ function extrachill_shop_register_update_order_status_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-update-order-status',
 		array(
-			'label'       => __( 'Update Order Status', 'extrachill-shop' ),
-			'description' => __( 'Update the status of an order, optionally adding a tracking number.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Update Order Status', 'extrachill-shop' ),
+			'description'         => __( 'Update the status of an order, optionally adding a tracking number.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'              => array(
@@ -47,9 +47,9 @@ function extrachill_shop_register_update_order_status_ability(): void {
 						'description' => 'Optional tracking number.',
 					),
 				),
-				'required' => array( 'id', 'artist_id', 'status' ),
+				'required'   => array( 'id', 'artist_id', 'status' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'              => array( 'type' => 'integer' ),
@@ -77,7 +77,7 @@ function extrachill_shop_register_update_order_status_ability(): void {
 				}
 				return current_user_can( 'manage_options' );
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => false,
@@ -112,7 +112,8 @@ function extrachill_shop_ability_update_order_status( array $input ): array|WP_E
 		return new WP_Error( 'order_not_found', 'Order not found.', array( 'status' => 404 ) );
 	}
 
-	$payouts = $order->get_meta( '_artist_payouts' ) ?: array();
+	$payouts = $order->get_meta( '_artist_payouts' );
+	$payouts = $payouts ? $payouts : array();
 	if ( ! isset( $payouts[ $artist_id ] ) ) {
 		return new WP_Error( 'rest_forbidden', 'This order does not contain products from your artist.', array( 'status' => 403 ) );
 	}

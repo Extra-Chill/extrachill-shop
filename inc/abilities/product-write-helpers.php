@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Product Write Helpers
  *
@@ -21,6 +20,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.8.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
@@ -356,7 +356,7 @@ function extrachill_shop_setup_product_variations( $product_id, $sizes, $price =
 			update_post_meta( $variation_id, 'attribute_pa_size', $size_slug );
 		}
 
-		if ( $price !== null ) {
+		if ( null !== $price ) {
 			update_post_meta( $variation_id, '_regular_price', (string) $price );
 			$effective_price = $price;
 

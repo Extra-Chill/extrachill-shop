@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Ability: extrachill/shop-create-product
  *
@@ -10,6 +9,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.7.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,10 +23,10 @@ function extrachill_shop_register_create_product_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-create-product',
 		array(
-			'label'       => __( 'Create Shop Product', 'extrachill-shop' ),
-			'description' => __( 'Create a new WooCommerce product for an artist profile with pricing, stock, sizes, and image associations.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Create Shop Product', 'extrachill-shop' ),
+			'description'         => __( 'Create a new WooCommerce product for an artist profile with pricing, stock, sizes, and image associations.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'artist_id'      => array(
@@ -82,9 +82,9 @@ function extrachill_shop_register_create_product_ability(): void {
 						'description' => 'Whether the product ships free.',
 					),
 				),
-				'required' => array( 'artist_id', 'name', 'price' ),
+				'required'   => array( 'artist_id', 'name', 'price' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'     => array( 'type' => 'integer' ),
@@ -110,7 +110,7 @@ function extrachill_shop_register_create_product_ability(): void {
 				}
 				return true;
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => false,

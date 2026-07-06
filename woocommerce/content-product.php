@@ -19,7 +19,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <li <?php wc_product_class( '', $product ); ?>>
 	<div class="product-card-image">
 		<a href="<?php echo esc_url( get_permalink() ); ?>">
-		<?php echo $product->get_image( 'woocommerce_thumbnail' ); ?>
+		<?php echo $product->get_image( 'woocommerce_thumbnail' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted WooCommerce core image HTML. ?>
 		</a>
 	</div>
 
@@ -29,10 +29,10 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		if ( $artist_terms && ! is_wp_error( $artist_terms ) ) :
 			?>
 		<div class="taxonomy-badges">
-			<?php foreach ( $artist_terms as $term ) : ?>
-				<a href="<?php echo esc_url( get_term_link( $term ) ); ?>"
-				class="taxonomy-badge artist-badge artist-<?php echo esc_attr( $term->slug ); ?>">
-				<?php echo esc_html( $term->name ); ?>
+			<?php foreach ( $artist_terms as $artist_term ) : ?>
+				<a href="<?php echo esc_url( get_term_link( $artist_term ) ); ?>"
+				class="taxonomy-badge artist-badge artist-<?php echo esc_attr( $artist_term->slug ); ?>">
+				<?php echo esc_html( $artist_term->name ); ?>
 			</a>
 			<?php endforeach; ?>
 		</div>
@@ -40,14 +40,17 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 
 		<h2 class="woocommerce-loop-product__title">
 			<a href="<?php echo esc_url( get_permalink() ); ?>">
-				<?php echo get_the_title(); ?>
+				<?php echo esc_html( get_the_title() ); ?>
 			</a>
 		</h2>
 
 		<?php woocommerce_template_loop_rating(); ?>
 
-		<?php if ( $price_html = $product->get_price_html() ) : ?>
-		<span class="price"><?php echo $price_html; ?></span>
+		<?php
+		$price_html = $product->get_price_html();
+		if ( $price_html ) :
+			?>
+		<span class="price"><?php echo wp_kses_post( $price_html ); ?></span>
 		<?php endif; ?>
 
 		<?php woocommerce_template_loop_add_to_cart(); ?>

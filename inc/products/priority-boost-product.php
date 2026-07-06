@@ -43,7 +43,7 @@ function extrachill_shop_get_priority_boost_product_config() {
 		'name'                  => 'Event Priority Boost',
 		'price'                 => '5',
 		'sold_individually'     => false,
-		'short_description'      => 'Boost an event to appear first in the calendar for its date.',
+		'short_description'     => 'Boost an event to appear first in the calendar for its date.',
 		'option_key'            => extrachill_shop_get_priority_boost_product_option_key(),
 		'sync_flag_key'         => extrachill_shop_get_priority_boost_product_sync_flag_key(),
 		'sync_transient_key'    => extrachill_shop_get_priority_boost_product_sync_transient_key(),

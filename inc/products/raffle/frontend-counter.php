@@ -46,8 +46,8 @@ function extrachill_shop_display_raffle_counter() {
 				printf(
 					/* translators: %1$d: remaining tickets, %2$d: total tickets */
 					esc_html__( '%1$d/%2$d tickets remaining', 'extrachill-shop' ),
-					$remaining,
-					$max
+					(int) $remaining,
+					(int) $max
 				);
 				?>
 			</span>

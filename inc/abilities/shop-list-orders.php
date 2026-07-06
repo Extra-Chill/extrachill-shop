@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Ability: extrachill/shop-list-orders
  *
@@ -10,6 +9,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.7.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,10 +23,10 @@ function extrachill_shop_register_list_orders_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-list-orders',
 		array(
-			'label'       => __( 'List Shop Orders', 'extrachill-shop' ),
-			'description' => __( 'List orders containing products from a specific artist, with filtering and pagination.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'List Shop Orders', 'extrachill-shop' ),
+			'description'         => __( 'List orders containing products from a specific artist, with filtering and pagination.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'artist_id' => array(
@@ -50,9 +50,9 @@ function extrachill_shop_register_list_orders_ability(): void {
 						'description' => 'Items per page.',
 					),
 				),
-				'required' => array( 'artist_id' ),
+				'required'   => array( 'artist_id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'orders'                  => array(
@@ -86,7 +86,7 @@ function extrachill_shop_register_list_orders_ability(): void {
 				}
 				return current_user_can( 'manage_options' );
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => true,
@@ -135,7 +135,8 @@ function extrachill_shop_ability_list_orders( array $input ): array|WP_Error {
 	$needs_fulfillment_count = 0;
 
 	foreach ( $orders as $order ) {
-		$payouts = $order->get_meta( '_artist_payouts' ) ?: array();
+		$payouts = $order->get_meta( '_artist_payouts' );
+		$payouts = $payouts ? $payouts : array();
 		if ( ! isset( $payouts[ $artist_id ] ) ) {
 			continue;
 		}
@@ -143,7 +144,7 @@ function extrachill_shop_ability_list_orders( array $input ): array|WP_Error {
 		$order_status = $order->get_status();
 
 		if ( 'processing' === $order_status || 'on-hold' === $order_status ) {
-			$needs_fulfillment_count++;
+			++$needs_fulfillment_count;
 		}
 
 		if ( 'needs_fulfillment' === $status && ! in_array( $order_status, array( 'processing', 'on-hold' ), true ) ) {
@@ -187,9 +188,11 @@ function extrachill_shop_ability_list_orders( array $input ): array|WP_Error {
  * @return array
  */
 function extrachill_shop_ability_build_order_response( $order, int $artist_id ): array {
-	$payouts         = $order->get_meta( '_artist_payouts' ) ?: array();
+	$payouts         = $order->get_meta( '_artist_payouts' );
+	$payouts         = $payouts ? $payouts : array();
 	$artist_payout   = $payouts[ $artist_id ] ?? array();
-	$tracking_number = $order->get_meta( '_artist_tracking_' . $artist_id ) ?: '';
+	$tracking_number = $order->get_meta( '_artist_tracking_' . $artist_id );
+	$tracking_number = $tracking_number ? $tracking_number : '';
 
 	$items = array();
 	if ( ! empty( $artist_payout['items'] ) ) {

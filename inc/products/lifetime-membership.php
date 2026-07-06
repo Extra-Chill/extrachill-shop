@@ -42,10 +42,12 @@ function extrachill_shop_get_default_community_username() {
 }
 
 function extrachill_shop_get_posted_community_username() {
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Read during the WooCommerce add-to-cart request, which WooCommerce nonce-verifies; value is sanitized.
 	if ( empty( $_POST['community_username'] ) ) {
 		return '';
 	}
 
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Read during the WooCommerce add-to-cart request, which WooCommerce nonce-verifies; value is sanitized.
 	return (string) sanitize_text_field( wp_unslash( $_POST['community_username'] ) );
 }
 
@@ -69,6 +71,7 @@ function extrachill_shop_add_community_username_field() {
 	<?php
 }
 
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_validate_lifetime_membership_add_to_cart( $passed, $product_id, $quantity ) {
 	if ( ! extrachill_shop_is_lifetime_membership_product_id( $product_id ) ) {
 		return $passed;
@@ -89,6 +92,7 @@ function extrachill_shop_validate_lifetime_membership_add_to_cart( $passed, $pro
 	return $passed;
 }
 
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_save_username_to_cart( $cart_item_data, $product_id, $variation_id ) {
 	if ( ! extrachill_shop_is_lifetime_membership_product_id( $product_id ) ) {
 		return $cart_item_data;
@@ -106,6 +110,7 @@ function extrachill_shop_save_username_to_cart( $cart_item_data, $product_id, $v
 	return $cart_item_data;
 }
 
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_add_username_to_order_item( $item, $cart_item_key, $values, $order ) {
 	if ( empty( $values['community_username'] ) ) {
 		return;
@@ -151,10 +156,12 @@ function extrachill_shop_cart_username_input( $name, $cart_item, $cart_item_key 
 }
 
 function extrachill_shop_save_username_cart_on_cart() {
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Read during the WooCommerce cart-update request, which WooCommerce nonce-verifies; values are sanitized below.
 	if ( empty( $_POST['community_username'] ) || ! is_array( $_POST['community_username'] ) ) {
 		return;
 	}
 
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Read during the WooCommerce cart-update request, which WooCommerce nonce-verifies; values are sanitized below.
 	$posted = wp_unslash( $_POST['community_username'] );
 
 	foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
@@ -227,6 +234,7 @@ function extrachill_shop_handle_lifetime_membership_purchase( $order_id ) {
 	}
 
 	if ( ! function_exists( 'ec_create_lifetime_membership' ) ) {
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 		error_log( 'extrachill-shop: ec_create_lifetime_membership() not found.' );
 		return;
 	}
@@ -240,6 +248,7 @@ function extrachill_shop_handle_lifetime_membership_purchase( $order_id ) {
 		$username = sanitize_text_field( $username );
 
 		if ( empty( $username ) ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 			error_log( "extrachill-shop: missing community_username meta for order {$order_id}." );
 			break;
 		}
@@ -252,6 +261,7 @@ function extrachill_shop_handle_lifetime_membership_purchase( $order_id ) {
 
 		$result = ec_create_lifetime_membership( $username, $order_data );
 		if ( is_wp_error( $result ) ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 			error_log( 'extrachill-shop: membership creation failed for order ' . $order_id . ': ' . $result->get_error_message() );
 			break;
 		}

@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Ability: extrachill/shop-list-shipping-labels
  *
@@ -10,6 +9,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.7.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,10 +23,10 @@ function extrachill_shop_register_list_shipping_labels_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-list-shipping-labels',
 		array(
-			'label'       => __( 'List Shipping Labels', 'extrachill-shop' ),
-			'description' => __( 'List all shipping labels purchased for a given artist across their orders.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'List Shipping Labels', 'extrachill-shop' ),
+			'description'         => __( 'List all shipping labels purchased for a given artist across their orders.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'artist_id' => array(
@@ -34,9 +34,9 @@ function extrachill_shop_register_list_shipping_labels_ability(): void {
 						'description' => 'Artist profile ID.',
 					),
 				),
-				'required' => array( 'artist_id' ),
+				'required'   => array( 'artist_id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'labels' => array(
@@ -65,7 +65,7 @@ function extrachill_shop_register_list_shipping_labels_ability(): void {
 				}
 				return current_user_can( 'manage_options' );
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => true,
@@ -111,18 +111,22 @@ function extrachill_shop_ability_list_shipping_labels( array $input ): array|WP_
 	$labels = array();
 
 	foreach ( $orders as $order ) {
-		$payouts = $order->get_meta( '_artist_payouts' ) ?: array();
+		$payouts = $order->get_meta( '_artist_payouts' );
+		$payouts = $payouts ? $payouts : array();
 		if ( ! isset( $payouts[ $artist_id ] ) ) {
 			continue;
 		}
 
-		$label_url = $order->get_meta( '_artist_label_' . $artist_id ) ?: '';
+		$label_url = $order->get_meta( '_artist_label_' . $artist_id );
+		$label_url = $label_url ? $label_url : '';
 		if ( empty( $label_url ) ) {
 			continue;
 		}
 
-		$tracking_number = $order->get_meta( '_artist_tracking_' . $artist_id ) ?: '';
-		$label_data      = $order->get_meta( '_artist_label_data_' . $artist_id ) ?: array();
+		$tracking_number = $order->get_meta( '_artist_tracking_' . $artist_id );
+		$tracking_number = $tracking_number ? $tracking_number : '';
+		$label_data      = $order->get_meta( '_artist_label_data_' . $artist_id );
+		$label_data      = $label_data ? $label_data : array();
 
 		$labels[] = array(
 			'order_id'        => $order->get_id(),

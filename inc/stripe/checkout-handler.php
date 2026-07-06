@@ -26,7 +26,7 @@ function extrachill_shop_group_cart_by_artist( $cart_items ) {
 		$artist_id  = extrachill_shop_get_product_artist_id( $product_id );
 
 		// Non-artist and platform artist products go to platform group (artist_id = 0).
-		if ( ! $artist_id || ( defined( 'EC_PLATFORM_ARTIST_ID' ) && $artist_id === EC_PLATFORM_ARTIST_ID ) ) {
+		if ( ! $artist_id || ( defined( 'EC_PLATFORM_ARTIST_ID' ) && EC_PLATFORM_ARTIST_ID === $artist_id ) ) {
 			$artist_id = 0;
 		}
 
@@ -240,6 +240,7 @@ function extrachill_shop_process_artist_transfers( $order, $charge_id ) {
 	} catch ( \Exception $e ) {
 		// Transfers can be reversed if needed, but typically we'd investigate manually.
 		// Log the error and failed state for admin review.
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 		error_log( 'Stripe transfer failed for order ' . $order->get_id() . ': ' . $e->getMessage() );
 
 		return array(
@@ -269,7 +270,8 @@ function extrachill_shop_get_or_create_stripe_customer( $order ) {
 		try {
 			return \Stripe\Customer::retrieve( $customer_id );
 		} catch ( \Exception $e ) {
-			// Customer doesn't exist, create new one.
+			// Customer doesn't exist; fall through to create a new one.
+			unset( $e );
 		}
 	}
 
@@ -315,6 +317,7 @@ function extrachill_shop_handle_charge_failure( $successful_charges, $failed_art
 			$refunded[] = $artist_id;
 		} catch ( \Exception $e ) {
 			$failed[ $artist_id ] = $e->getMessage();
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional diagnostic logging for payment/membership failures.
 			error_log( 'Rollback refund failed for artist ' . $artist_id . ': ' . $e->getMessage() );
 		}
 	}
@@ -337,7 +340,7 @@ function extrachill_shop_order_is_platform_only( $order ) {
 	foreach ( $order->get_items() as $item ) {
 		$artist_id = extrachill_shop_get_product_artist_id( $item->get_product_id() );
 		// Platform artist products are treated as platform products.
-		if ( $artist_id && ( ! defined( 'EC_PLATFORM_ARTIST_ID' ) || $artist_id !== EC_PLATFORM_ARTIST_ID ) ) {
+		if ( $artist_id && ( ! defined( 'EC_PLATFORM_ARTIST_ID' ) || EC_PLATFORM_ARTIST_ID !== $artist_id ) ) {
 			return false;
 		}
 	}
@@ -351,7 +354,8 @@ function extrachill_shop_order_is_platform_only( $order ) {
  * @return array Charges indexed by artist ID.
  */
 function extrachill_shop_get_order_charges( $order ) {
-	return $order->get_meta( '_stripe_charges' ) ?: array();
+	$charges = $order->get_meta( '_stripe_charges' );
+	return $charges ? $charges : array();
 }
 
 /**
@@ -361,5 +365,6 @@ function extrachill_shop_get_order_charges( $order ) {
  * @return array Payout data indexed by artist ID.
  */
 function extrachill_shop_get_order_artist_payouts( $order ) {
-	return $order->get_meta( '_artist_payouts' ) ?: array();
+	$payouts = $order->get_meta( '_artist_payouts' );
+	return $payouts ? $payouts : array();
 }

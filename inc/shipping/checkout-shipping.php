@@ -84,6 +84,7 @@ function extrachill_shop_shipping_method_init() {
 
 			if ( $artist_count > 1 ) {
 				$label = sprintf(
+					/* translators: 1: per-artist shipping rate, 2: number of artists. */
 					__( 'Shipping ($%1$s × %2$d artists)', 'extrachill-shop' ),
 					number_format( $rate_per_artist, 0 ),
 					$artist_count
@@ -224,6 +225,7 @@ add_filter( 'woocommerce_shipping_countries', 'extrachill_shop_restrict_shipping
  */
 add_action( 'woocommerce_checkout_create_order', 'extrachill_shop_store_order_artist_ids', 10, 2 );
 
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_store_order_artist_ids( $order, $data ) {
 	$artist_ids = extrachill_shop_get_cart_artist_ids();
 	if ( ! empty( $artist_ids ) ) {

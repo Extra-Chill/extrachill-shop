@@ -102,9 +102,8 @@ function extrachill_shop_breadcrumb_trail( $trail ) {
 			}
 			$breadcrumbs[] = esc_html( $term->name );
 		}
-	}
-	// Single product
-	elseif ( is_product() ) {
+	} elseif ( is_product() ) {
+		// Single product.
 		$product_cats = get_the_terms( get_the_ID(), 'product_cat' );
 		if ( $product_cats && ! is_wp_error( $product_cats ) ) {
 			$product_cat = array_shift( $product_cats );
@@ -119,17 +118,14 @@ function extrachill_shop_breadcrumb_trail( $trail ) {
 			}
 			$breadcrumbs[] = '<a href="' . esc_url( get_term_link( $product_cat ) ) . '">' . esc_html( $product_cat->name ) . '</a>';
 		}
-	}
-	// Cart
-	elseif ( is_cart() ) {
+	} elseif ( is_cart() ) {
+		// Cart.
 		$breadcrumbs[] = 'Cart';
-	}
-	// Checkout
-	elseif ( is_checkout() ) {
+	} elseif ( is_checkout() ) {
+		// Checkout.
 		$breadcrumbs[] = 'Checkout';
-	}
-	// My Account
-	elseif ( is_account_page() ) {
+	} elseif ( is_account_page() ) {
+		// My Account.
 		$breadcrumbs[] = 'My Account';
 	}
 
@@ -189,6 +185,7 @@ add_action( 'extrachill_before_body_content', 'extrachill_shop_display_breadcrum
  * @param string $url   Back-to-home link URL
  * @return string Modified label
  */
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_back_to_home_label( $label, $url ) {
 	$shop_blog_id = function_exists( 'ec_get_blog_id' ) ? ec_get_blog_id( 'shop' ) : null;
 	if ( ! $shop_blog_id || get_current_blog_id() !== $shop_blog_id ) {

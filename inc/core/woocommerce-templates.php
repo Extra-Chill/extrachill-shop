@@ -107,6 +107,7 @@ add_filter( 'template_include', 'extrachill_shop_woocommerce_template_loader', 9
  * @param string $template_path Template directory path
  * @return string Modified template path if plugin template exists, otherwise original path
  */
+// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress hook/callback contract.
 function extrachill_shop_locate_woocommerce_template( $template, $template_name, $template_path ) {
 	$plugin_template = EXTRACHILL_SHOP_PLUGIN_DIR . 'woocommerce/' . $template_name;
 

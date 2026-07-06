@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Ability: extrachill/shop-delete-product
  *
@@ -10,6 +9,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.7.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,10 +23,10 @@ function extrachill_shop_register_delete_product_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-delete-product',
 		array(
-			'label'       => __( 'Delete Shop Product', 'extrachill-shop' ),
-			'description' => __( 'Move a WooCommerce product to the trash.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Delete Shop Product', 'extrachill-shop' ),
+			'description'         => __( 'Move a WooCommerce product to the trash.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id' => array(
@@ -34,9 +34,9 @@ function extrachill_shop_register_delete_product_ability(): void {
 						'description' => 'Product ID.',
 					),
 				),
-				'required' => array( 'id' ),
+				'required'   => array( 'id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'deleted'    => array( 'type' => 'boolean' ),
@@ -65,7 +65,7 @@ function extrachill_shop_register_delete_product_ability(): void {
 				}
 				return true;
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => false,

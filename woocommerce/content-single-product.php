@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 global $product;
 
 if ( post_password_required() ) {
-	echo get_the_password_form();
+	echo get_the_password_form(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted WordPress core password form HTML.
 	return;
 }
 
@@ -109,7 +109,7 @@ if ( function_exists( 'extrachill_breadcrumbs' ) ) {
 		}
 		?>
 
-		<p class="price"><?php echo $product->get_price_html(); ?></p>
+		<p class="price"><?php echo wp_kses_post( $product->get_price_html() ); ?></p>
 
 		<?php woocommerce_template_single_rating(); ?>
 
@@ -126,7 +126,7 @@ if ( function_exists( 'extrachill_breadcrumbs' ) ) {
 		} else {
 			$stock_html = '<p class="stock out-of-stock">' . esc_html__( 'Out of stock', 'extrachill-shop' ) . '</p>';
 		}
-		echo $stock_html;
+		echo wp_kses_post( $stock_html );
 		?>
 
 		<?php

@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Ability: extrachill/shop-stripe-onboarding-link
  *
@@ -11,6 +10,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.7.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,10 +24,10 @@ function extrachill_shop_register_stripe_onboarding_link_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-stripe-onboarding-link',
 		array(
-			'label'       => __( 'Stripe Onboarding Link', 'extrachill-shop' ),
-			'description' => __( 'Generate a Stripe Connect onboarding link for an artist. Creates the account if needed.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Stripe Onboarding Link', 'extrachill-shop' ),
+			'description'         => __( 'Generate a Stripe Connect onboarding link for an artist. Creates the account if needed.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'artist_id' => array(
@@ -35,9 +35,9 @@ function extrachill_shop_register_stripe_onboarding_link_ability(): void {
 						'description' => 'Artist profile ID.',
 					),
 				),
-				'required' => array( 'artist_id' ),
+				'required'   => array( 'artist_id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'success' => array( 'type' => 'boolean' ),
@@ -61,7 +61,7 @@ function extrachill_shop_register_stripe_onboarding_link_ability(): void {
 				}
 				return current_user_can( 'manage_options' );
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => true,

@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Ability: extrachill/shop-delete-product-image
  *
@@ -10,6 +9,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.7.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,10 +23,10 @@ function extrachill_shop_register_delete_product_image_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-delete-product-image',
 		array(
-			'label'       => __( 'Delete Product Image', 'extrachill-shop' ),
-			'description' => __( 'Remove a single image from a product. Products must keep at least one image.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Delete Product Image', 'extrachill-shop' ),
+			'description'         => __( 'Remove a single image from a product. Products must keep at least one image.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'            => array(
@@ -38,9 +38,9 @@ function extrachill_shop_register_delete_product_image_ability(): void {
 						'description' => 'Attachment ID of the image to delete.',
 					),
 				),
-				'required' => array( 'id', 'attachment_id' ),
+				'required'   => array( 'id', 'attachment_id' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'type'       => 'object',
 				'properties' => array(
 					'id'     => array( 'type' => 'integer' ),
@@ -78,7 +78,7 @@ function extrachill_shop_register_delete_product_image_ability(): void {
 				}
 				return false;
 			},
-			'meta' => array(
+			'meta'                => array(
 				'show_in_rest' => true,
 				'annotations'  => array(
 					'readonly'    => false,
@@ -151,7 +151,10 @@ function extrachill_shop_ability_delete_product_image( array $input ): array|WP_
 		return extrachill_shop_ability_build_product_response( $product_id );
 	}
 
-	return array( 'deleted' => true, 'product_id' => $product_id );
+	return array(
+		'deleted'    => true,
+		'product_id' => $product_id,
+	);
 }
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────

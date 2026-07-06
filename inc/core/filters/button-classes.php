@@ -20,6 +20,7 @@ defined( 'ABSPATH' ) || exit;
  */
 add_filter(
 	'woocommerce_loop_add_to_cart_args',
+	// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- Signature dictated by the WordPress filter contract.
 	function ( $args, $product ) {
 		$args['class'] .= ' button-1 button-medium';
 		return $args;

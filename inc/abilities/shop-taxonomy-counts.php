@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Ability: extrachill/shop-taxonomy-counts
  *
@@ -10,6 +9,7 @@ declare(strict_types=1);
  * @package ExtraChillShop
  * @since   0.7.0
  */
+declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,10 +23,10 @@ function extrachill_shop_register_taxonomy_counts_ability(): void {
 	wp_register_ability(
 		'extrachill/shop-taxonomy-counts',
 		array(
-			'label'       => __( 'Shop Taxonomy Counts', 'extrachill-shop' ),
-			'description' => __( 'Return taxonomy term counts for shop products. Supports querying by slug or bulk listing.', 'extrachill-shop' ),
-			'category'    => 'extrachill-shop',
-			'input_schema' => array(
+			'label'               => __( 'Shop Taxonomy Counts', 'extrachill-shop' ),
+			'description'         => __( 'Return taxonomy term counts for shop products. Supports querying by slug or bulk listing.', 'extrachill-shop' ),
+			'category'            => 'extrachill-shop',
+			'input_schema'        => array(
 				'type'       => 'object',
 				'properties' => array(
 					'taxonomy' => array(
@@ -46,9 +46,9 @@ function extrachill_shop_register_taxonomy_counts_ability(): void {
 						'description' => 'Max terms to return for bulk queries.',
 					),
 				),
-				'required' => array( 'taxonomy' ),
+				'required'   => array( 'taxonomy' ),
 			),
-			'output_schema' => array(
+			'output_schema'       => array(
 				'anyOf' => array(
 					array(
 						'type'  => 'array',
